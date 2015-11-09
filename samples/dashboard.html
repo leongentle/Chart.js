@@ -1,0 +1,273 @@
+﻿<!doctype html>
+<html>
+	<head>
+	    <title>Dashboard</title>
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="../Chart.js"></script>
+	</head>
+	<body>
+	<div style="width: 45%; position: relative; float: left;">
+	    Trade club vs total trade 2015
+	    <canvas id="canvasBar"></canvas>
+        <div id="legendDivBar"></div>
+	</div>
+
+
+	<div style="width: 45%; float: left; margin-left: 5%;">
+	    Trade club vs total trade 2015
+	    <canvas id="canvasLine"></canvas>
+        <div id="legendDivLine"></div>
+	</div>
+
+	<div style="width: 45%; float: left;">
+	    Trade club last year vs this year
+	    <canvas id="canvasLineRunRate"></canvas>
+        <div id="legendDivRunRate"></div>
+	</div>
+
+	<div style="width: 45%; float: left; margin-left: 5%;">
+	    Bump the competition
+	    <canvas id="canvasRadar"></canvas>
+        <div id="legendDivRadar"></div>
+	</div>
+
+	<div style="width: 45%; float: left;">
+	    Bump The Competition Products Sold
+	    <canvas id="canvasPie"></canvas>
+	    <div id="legendDivPie"></div>
+	</div>
+
+    <div style="width: 45%; float: left; margin-left: 5%;">
+	    Alpha list
+	    <canvas id="canvasPieAlphaList"></canvas>
+        <div id="legendDivPieAlphaList"></div>
+	</div>
+
+
+	<script>
+	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+	var barChartData = {
+		labels : ["January","February","March","April","May","June","July"],
+		datasets : [
+			{
+			    label: "Trade Club",
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			},
+			{
+			    label: "Total Trade",
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,0.8)",
+				highlightFill : "rgba(151,187,205,0.75)",
+				highlightStroke : "rgba(151,187,205,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			}
+
+
+		]
+
+	}
+
+	var lineChartData = {
+	    labels: ["January", "February", "March", "April", "May", "June", "July"],
+	    datasets: [
+            {
+                label: "Trade Club",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            },
+            {
+                label: "Total Trade",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            }
+	    ]
+
+	}
+
+	var lineChartDataRunRate = {
+	    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+	    datasets: [
+            {
+                label: "2014",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [10, 25, 30, 38, 52, 60, 79, 85, 93, 104, 110, 118]
+            },
+            {
+                label: "2015",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [2, 10, 30, 49, 60, 75, 99, 106]
+            }
+	    ]
+
+	}
+
+
+	var radarChartData = {
+	    labels: ["NS", "QL", "SA", "VI", "WA"],
+	    datasets: [
+			{
+			    label: "2014",
+			    fillColor: "rgba(220,220,220,0.2)",
+			    strokeColor: "rgba(220,220,220,1)",
+			    pointColor: "rgba(220,220,220,1)",
+			    pointStrokeColor: "#fff",
+			    pointHighlightFill: "#fff",
+			    pointHighlightStroke: "rgba(220,220,220,1)",
+			    data: [65, 59, 90, 81, 56]
+			},
+			{
+			    label: "2015",
+			    fillColor: "rgba(151,187,205,0.2)",
+			    strokeColor: "rgba(151,187,205,1)",
+			    pointColor: "rgba(151,187,205,1)",
+			    pointStrokeColor: "#fff",
+			    pointHighlightFill: "#fff",
+			    pointHighlightStroke: "rgba(151,187,205,1)",
+			    data: [28, 48, 40, 19, 96]
+			}
+	    ]
+	};
+
+	var pieData = [
+				{
+				    value: 300,
+				    color: "#F7464A",
+				    highlight: "#FF5A5E",
+				    label: "Headlamps"
+				},
+				{
+				    value: 50,
+				    color: "#46BFBD",
+				    highlight: "#5AD3D1",
+				    label: "Tail Lamps"
+				},
+				{
+				    value: 100,
+				    color: "#FDB45C",
+				    highlight: "#FFC870",
+				    label: "Fascia's - Front"
+				},
+				{
+				    value: 40,
+				    color: "#949FB1",
+				    highlight: "#A8B3C5",
+				    label: "Fascia's - Rear"
+				},
+				{
+				    value: 120,
+				    color: "#4D5360",
+				    highlight: "#616774",
+				    label: "Grilles"
+				}
+                ,
+				{
+				    value: 80,
+				    color: "#ffffaa",
+				    highlight: "#616774",
+				    label: "Hoods and Tailgates"
+				}
+                ,
+				{
+				    value: 250,
+				    color: "#aaffff",
+				    highlight: "#616774",
+				    label: "Doors"
+				}
+                ,
+				{
+				    value: 190,
+				    color: "#ffaaff",
+				    highlight: "#616774",
+				    label: "Exterior Mouldings"
+				}
+
+	];
+
+	var pieAlphaListData = [
+				{
+				    value: 20,
+				    color: "red",
+				    highlight: "#FF5A5E",
+				    label: "Inactive"
+				},
+				{
+				    value: 15,
+				    color: "orange",
+				    highlight: "#5AD3D1",
+				    label: "Dormant"
+				},
+				{
+				    value: 75,
+				    color: "green",
+				    highlight: "#FFC870",
+				    label: "Active"
+				}
+
+	];
+
+	window.onload = function(){
+	    var ctxBar = document.getElementById("canvasBar").getContext("2d");
+	    window.myBar = new Chart(ctxBar).Bar(barChartData, {
+			responsive : true
+		});
+
+	    var ctxLine = document.getElementById("canvasLine").getContext("2d");
+	    window.myLine = new Chart(ctxLine).Line(lineChartData, {
+		    responsive: true
+	    });
+
+	    var ctxLineRunRate = document.getElementById("canvasLineRunRate").getContext("2d");
+	    window.myLineRunRate = new Chart(ctxLineRunRate).Line(lineChartDataRunRate, {
+	        responsive: true
+	    });
+
+	    window.myRadar = new Chart(document.getElementById("canvasRadar").getContext("2d")).Radar(radarChartData, {
+	        responsive: true
+	    });
+
+	    var ctxPie = document.getElementById("canvasPie").getContext("2d");
+	    window.myPie = new Chart(ctxPie).Pie(pieData, {
+	        responsive: true
+	    });
+
+	    var ctxPieAlphaList = document.getElementById("canvasPieAlphaList").getContext("2d");
+	    window.myPieAlphaList = new Chart(ctxPieAlphaList).Pie(pieAlphaListData, {
+	        responsive: true
+	    });
+
+	    document.getElementById("legendDivBar").innerHTML = window.myBar.generateLegend();
+	    document.getElementById("legendDivLine").innerHTML = window.myLine.generateLegend();
+	    document.getElementById("legendDivRunRate").innerHTML = window.myLineRunRate.generateLegend();
+	    document.getElementById("legendDivRadar").innerHTML = window.myRadar.generateLegend();
+	    document.getElementById("legendDivPie").innerHTML = window.myPie.generateLegend();
+	    document.getElementById("legendDivPieAlphaList").innerHTML = window.myPieAlphaList.generateLegend();
+	}
+
+	</script>
+	</body>
+</html>
