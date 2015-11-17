@@ -3,78 +3,487 @@
 	<head>
 	    <title>Dashboard</title>
         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="../Chart.js"></script>
+	    <script src="../Chart.js"></script>
+        <link href="../Simple-jQuery-Plugin-For-Creating-SVG-Based-Gauges/jquery-gauge.css" rel="stylesheet" />
+	    <style>
+    	    body {
+    	        font-family: arial;
+    	    }
+    	     .container {
+    	         margin: 0 auto;
+    	         text-align: center;
+                
+    	     }
+
+    	    .gauge {
+    	        /*width: 450px;
+                height: 450px;*/
+    	        float: left;
+    	    }
+
+    	    a:link.button,
+    	    a:active.button,
+    	    a:visited.button,
+    	    a:hover.button {
+    	        margin: 30px 5px 0 2px;
+    	        padding: 7px 13px;
+    	    }
+    	</style>
+
+        <style>
+            .demo1 {
+                position: relative;
+                width: 20vw;
+                height: 20vw;
+                box-sizing: border-box;
+                float: left;
+                margin: 20px;
+            }
+
+            .demo2 {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                box-sizing: border-box;
+                float: left;
+                margin: 20px;
+            }
+
+            .demo3 {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                margin-top: 20px;
+                margin-bottom: 0px;
+            }
+
+            .gaugeContainer {
+                width: 200px;
+                height: 200px;
+                float: left;
+                margin: 20px;
+                margin-bottom: 30px;
+                
+            }
+
+            .gaugeContainer .guageFoot {
+                margin-top: -60px;
+            }
+
+            .b-gauge__label {
+                font-size: 12px;
+            }
+        </style>
 	</head>
-	<body>
-	<div style="width: 45%; position: relative; float: left;">
-	    Trade club vs total trade 2015
-	    <canvas id="canvasBar"></canvas>
-        <div id="legendDivBar"></div>
-	</div>
+<body>
+<div class="container">
+    <!--<div class="gauge1 demo1"></div>-->
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>Dealer Target</b></div>
+        <div class="gauge2 demo3"></div>
+        <div class="guageFoot">
+            <b>112%</b><br/>
+            Total:3691<br/>
+            <b>Target:4963</b>
+        </div>
+    </div>
+
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>Alpha List Target</b></div>
+        <div class="gauge3 demo3"></div>
+        <div class="guageFoot">
+            <b>80%</b><br/>
+            Total:800<br/>
+            <b>Target:1000</b>
+        </div>
+    </div>
+
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>TC Sales Target</b></div>
+        <div class="gauge4 demo3"></div>
+        <div class="guageFoot">
+            <b>31%</b><br/>
+            Total:12036<br/>
+            <b>Target:3956</b>
+        </div>
+    </div>
+
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>New Members Target</b></div>
+        <div class="gauge5 demo3"></div>
+        <div class="guageFoot">
+            <b>125%</b><br/>
+            Total:5000<br/>
+            <b>Target:4000</b>
+        </div>
+    </div>
+
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>Heldover Resolution</b></div>
+        <div class="gauge6 demo3"></div>
+        <div class="guageFoot">
+            <b>60%</b><br/>
+            Total:6<br/>
+            <b>Target:10</b>
+        </div>
+    </div>
+
+    <div class="gaugeContainer">
+        <div class="guageHead"><b>Promotions / incentives performance</b></div>
+        <div class="gauge7 demo3"></div>
+        <div class="guageFoot">
+            <b>105%</b><br />
+            Total:10500<br />
+            <b>Target:10000</b>
+        </div>
+    </div>
+
+    <!--<div class="gauge2 demo2"></div>
+    <div class="gauge2 demo2"></div>
+    <div class="gauge2 demo2"></div>
+    <div class="gauge2 demo2"></div>
+    <div class="gauge2 demo2"></div>-->
+
+    <div style="width: 100%; position: relative; float: none; display: block; clear: both;">&nbsp;</div>
+    <br/>
+    <div id="gg1" class="gauge"></div>
+    <div id="gg2" class="gauge"></div>
+    <div id="gg3" class="gauge"></div>
+    <div id="gg4" class="gauge"></div>
+    <div id="gg5" class="gauge"></div>
+    <div id="gg6" class="gauge"></div>
+    <!--<a href="#" id="gg1_refresh">Random Refresh</a>-->
+</div>
+<div style="width: 100%; float: right;">&nbsp;</div>
+<div style="width: 45%; position: relative; float: left;">
+    <b>Trade club vs total trade 2015</b>
+    <canvas id="canvasBar"></canvas>
+    <div id="legendDivBar"></div>
+</div>
 
 
-	<div style="width: 45%; float: left; margin-left: 5%;">
-	    Trade club vs total trade 2015
-	    <canvas id="canvasLine"></canvas>
-        <div id="legendDivLine"></div>
-	</div>
+<div style="width: 45%; float: left; margin-left: 5%;">
+    <b>Trade club vs total trade 2015</b>
+    <canvas id="canvasLine"></canvas>
+    <div id="legendDivLine"></div>
+</div>
 
-	<div style="width: 45%; float: left;">
-	    Trade club last year vs this year
-	    <canvas id="canvasLineRunRate"></canvas>
-        <div id="legendDivRunRate"></div>
-	</div>
+<div style="width: 45%; float: left;">
+    <b>Trade club last year vs this year</b>
+    <canvas id="canvasLineRunRate"></canvas>
+    <div id="legendDivRunRate"></div>
+</div>
 
-	<div style="width: 45%; float: left; margin-left: 5%;">
-	    Bump the competition
-	    <canvas id="canvasRadar"></canvas>
-        <div id="legendDivRadar"></div>
-	</div>
+<div style="width: 45%; float: left; margin-left: 5%;">
+    <b>Bump the competition</b>
+    
+    <canvas id="canvasRadar"></canvas>
+    <div id="legendDivRadar"></div>
+</div>
 
-	<div style="width: 45%; float: left;">
-	    Bump The Competition Products Sold
-	    <canvas id="canvasPie"></canvas>
-	    <div id="legendDivPie"></div>
-	</div>
+<div style="width: 45%; float: left;">
+    
+    <b>Bump The Competition Products Sold</b>
+    <canvas id="canvasPie"></canvas>
+    <div id="legendDivPie"></div>
+</div>
 
-    <div style="width: 45%; float: left; margin-left: 5%;">
-	    Alpha list
-	    <canvas id="canvasPieAlphaList"></canvas>
-        <div id="legendDivPieAlphaList"></div>
-	</div>
+<div style="width: 45%; float: left; margin-left: 5%;">
+   
+    <b> Alpha list</b>
+    <canvas id="canvasPieAlphaList"></canvas>
+    <div id="legendDivPieAlphaList"></div>
+</div>
+<script src="../justgage-1.1.0/raphael-2.1.4.min.js"></script>
+<script src="../justgage-1.1.0/justgage-1.1.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../Simple-jQuery-Plugin-For-Creating-SVG-Based-Gauges/jquery-gauge.min.js"></script>
+    <script>
 
+        // first example
+        //var gauge = new Gauge($('.gauge1'), {value: 70});
 
-	<script>
-	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+        // second example
+        $('.gauge2').gauge({
+            values: {
+                0 : '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset:true,
 
-	var barChartData = {
-		labels : ["January","February","March","April","May","June","July"],
-		datasets : [
-			{
-			    label: "Trade Club",
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,0.8)",
-				highlightFill: "rgba(220,220,220,0.75)",
-				highlightStroke: "rgba(220,220,220,1)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-			},
-			{
-			    label: "Total Trade",
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,0.8)",
-				highlightFill : "rgba(151,187,205,0.75)",
-				highlightStroke : "rgba(151,187,205,1)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-			}
+            value: 90
+        });
 
+        $('.gauge3').gauge({
+            values: {
+                0: '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset: true,
 
-		]
+            value: 70
+        });
 
-	}
+        $('.gauge4').gauge({
+            values: {
+                0: '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset: true,
 
-	var lineChartData = {
-	    labels: ["January", "February", "March", "April", "May", "June", "July"],
-	    datasets: [
+            value: 25
+        });
+
+        $('.gauge5').gauge({
+            values: {
+                0: '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset: true,
+
+            value: 100
+        });
+
+        $('.gauge6').gauge({
+            values: {
+                0: '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset: true,
+
+            value: 53
+        });
+
+        $('.gauge7').gauge({
+            values: {
+                0: '0%   ',
+                20: '25%  ',
+                40: '50%  ',
+                60: '75%  ',
+                80: '100% ',
+                100: '125% '
+            },
+            colors: {
+                0: '#f00',
+                9: '#f00',
+                60: '#ffa500',
+                80: '#378618'
+            },
+            angles: [
+                150,
+                390
+            ],
+            lineWidth: 10,
+            arrowWidth: 20,
+            arrowColor: '#ccc',
+            inset: true,
+
+            value: 83
+        });
+    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var gg1 = new JustGage({
+            id: "gg1",
+            value: 1100000,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            formatNumber: true,
+            title: "Differnt Style Guage",
+            customSectors: [{
+                color: "#ff0000",
+                lo: 0,
+                hi: 333333
+            }, {
+                color: "#eec700",
+                lo: 333333,
+                hi: 666666
+            }, {
+                color: "#20d820",
+                lo: 666666,
+                hi: 1000000
+            }]
+
+        });
+
+        var gg2 = new JustGage({
+            id: "gg2",
+            value: 900960,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            title: "Differnt Style Guage",
+            formatNumber: true
+        });
+
+        var gg3 = new JustGage({
+            id: "gg3",
+            value: 600960,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            title: "Differnt Style Guage",
+            formatNumber: true
+        });
+
+        var gg4 = new JustGage({
+            id: "gg4",
+            value: 450960,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            title: "Differnt Style Guage",
+            formatNumber: true
+        });
+
+        var gg5 = new JustGage({
+            id: "gg5",
+            value: 450960,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            title: "Differnt Style Guage",
+            formatNumber: true
+        });
+
+        var gg6 = new JustGage({
+            id: "gg6",
+            value: 450960,
+            min: 0,
+            max: 1000000,
+            gaugeWidthScale: 0.6,
+            counter: true,
+            title: "Differnt Style Guage",
+            formatNumber: true
+        });
+
+        //document.getElementById('gg1_refresh').addEventListener('click', function() {
+        //    gg1.refresh(getRandomInt(1024, 1000000));
+        //});
+    });
+</script>
+
+<script>
+    var randomScalingFactor = function() { return Math.round(Math.random() * 100) };
+
+    var barChartData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "Trade Club",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            },
+            {
+                label: "Total Trade",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+            }
+        ]
+
+    }
+
+    var lineChartData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
             {
                 label: "Trade Club",
                 fillColor: "rgba(220,220,220,0.2)",
@@ -95,13 +504,13 @@
                 pointHighlightStroke: "rgba(151,187,205,1)",
                 data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
             }
-	    ]
+        ]
 
-	}
+    }
 
-	var lineChartDataRunRate = {
-	    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-	    datasets: [
+    var lineChartDataRunRate = {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [
             {
                 label: "2014",
                 fillColor: "rgba(220,220,220,0.2)",
@@ -122,152 +531,147 @@
                 pointHighlightStroke: "rgba(151,187,205,1)",
                 data: [2, 10, 30, 49, 60, 75, 99, 106]
             }
-	    ]
+        ]
 
-	}
+    }
 
 
-	var radarChartData = {
-	    labels: ["NS", "QL", "SA", "VI", "WA"],
-	    datasets: [
-			{
-			    label: "2014",
-			    fillColor: "rgba(220,220,220,0.2)",
-			    strokeColor: "rgba(220,220,220,1)",
-			    pointColor: "rgba(220,220,220,1)",
-			    pointStrokeColor: "#fff",
-			    pointHighlightFill: "#fff",
-			    pointHighlightStroke: "rgba(220,220,220,1)",
-			    data: [65, 59, 90, 81, 56]
-			},
-			{
-			    label: "2015",
-			    fillColor: "rgba(151,187,205,0.2)",
-			    strokeColor: "rgba(151,187,205,1)",
-			    pointColor: "rgba(151,187,205,1)",
-			    pointStrokeColor: "#fff",
-			    pointHighlightFill: "#fff",
-			    pointHighlightStroke: "rgba(151,187,205,1)",
-			    data: [28, 48, 40, 19, 96]
-			}
-	    ]
-	};
+    var radarChartData = {
+        labels: ["NS", "QL", "SA", "VI", "WA"],
+        datasets: [
+            {
+                label: "2014",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 90, 81, 56]
+            },
+            {
+                label: "2015",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [28, 48, 40, 19, 96]
+            }
+        ]
+    };
 
-	var pieData = [
-				{
-				    value: 300,
-				    color: "#F7464A",
-				    highlight: "#FF5A5E",
-				    label: "Headlamps"
-				},
-				{
-				    value: 50,
-				    color: "#46BFBD",
-				    highlight: "#5AD3D1",
-				    label: "Tail Lamps"
-				},
-				{
-				    value: 100,
-				    color: "#FDB45C",
-				    highlight: "#FFC870",
-				    label: "Fascia's - Front"
-				},
-				{
-				    value: 40,
-				    color: "#949FB1",
-				    highlight: "#A8B3C5",
-				    label: "Fascia's - Rear"
-				},
-				{
-				    value: 120,
-				    color: "#4D5360",
-				    highlight: "#616774",
-				    label: "Grilles"
-				}
-                ,
-				{
-				    value: 80,
-				    color: "#ffffaa",
-				    highlight: "#616774",
-				    label: "Hoods and Tailgates"
-				}
-                ,
-				{
-				    value: 250,
-				    color: "#aaffff",
-				    highlight: "#616774",
-				    label: "Doors"
-				}
-                ,
-				{
-				    value: 190,
-				    color: "#ffaaff",
-				    highlight: "#616774",
-				    label: "Exterior Mouldings"
-				}
+    var pieData = [
+        {
+            value: 300,
+            color: "#F7464A",
+            highlight: "#FF5A5E",
+            label: "Headlamps"
+        },
+        {
+            value: 50,
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: "Tail Lamps"
+        },
+        {
+            value: 100,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Fascia's - Front"
+        },
+        {
+            value: 40,
+            color: "#949FB1",
+            highlight: "#A8B3C5",
+            label: "Fascia's - Rear"
+        },
+        {
+            value: 120,
+            color: "#4D5360",
+            highlight: "#616774",
+            label: "Grilles"
+        },
+        {
+            value: 80,
+            color: "#ffffaa",
+            highlight: "#616774",
+            label: "Hoods and Tailgates"
+        },
+        {
+            value: 250,
+            color: "#aaffff",
+            highlight: "#616774",
+            label: "Doors"
+        },
+        {
+            value: 190,
+            color: "#ffaaff",
+            highlight: "#616774",
+            label: "Exterior Mouldings"
+        }
+    ];
 
-	];
+    var pieAlphaListData = [
+        {
+            value: 20,
+            color: "red",
+            highlight: "#FF5A5E",
+            label: "Inactive"
+        },
+        {
+            value: 15,
+            color: "orange",
+            highlight: "#5AD3D1",
+            label: "Dormant"
+        },
+        {
+            value: 75,
+            color: "green",
+            highlight: "#FFC870",
+            label: "Active"
+        }
+    ];
 
-	var pieAlphaListData = [
-				{
-				    value: 20,
-				    color: "red",
-				    highlight: "#FF5A5E",
-				    label: "Inactive"
-				},
-				{
-				    value: 15,
-				    color: "orange",
-				    highlight: "#5AD3D1",
-				    label: "Dormant"
-				},
-				{
-				    value: 75,
-				    color: "green",
-				    highlight: "#FFC870",
-				    label: "Active"
-				}
+    window.onload = function() {
+        var ctxBar = document.getElementById("canvasBar").getContext("2d");
+        window.myBar = new Chart(ctxBar).Bar(barChartData, {
+            responsive: true
+        });
 
-	];
+        var ctxLine = document.getElementById("canvasLine").getContext("2d");
+        window.myLine = new Chart(ctxLine).Line(lineChartData, {
+            responsive: true
+        });
 
-	window.onload = function(){
-	    var ctxBar = document.getElementById("canvasBar").getContext("2d");
-	    window.myBar = new Chart(ctxBar).Bar(barChartData, {
-			responsive : true
-		});
+        var ctxLineRunRate = document.getElementById("canvasLineRunRate").getContext("2d");
+        window.myLineRunRate = new Chart(ctxLineRunRate).Line(lineChartDataRunRate, {
+            responsive: true
+        });
 
-	    var ctxLine = document.getElementById("canvasLine").getContext("2d");
-	    window.myLine = new Chart(ctxLine).Line(lineChartData, {
-		    responsive: true
-	    });
+        window.myRadar = new Chart(document.getElementById("canvasRadar").getContext("2d")).Radar(radarChartData, {
+            responsive: true
+        });
 
-	    var ctxLineRunRate = document.getElementById("canvasLineRunRate").getContext("2d");
-	    window.myLineRunRate = new Chart(ctxLineRunRate).Line(lineChartDataRunRate, {
-	        responsive: true
-	    });
+        var ctxPie = document.getElementById("canvasPie").getContext("2d");
+        window.myPie = new Chart(ctxPie).Pie(pieData, {
+            responsive: true
+        });
 
-	    window.myRadar = new Chart(document.getElementById("canvasRadar").getContext("2d")).Radar(radarChartData, {
-	        responsive: true
-	    });
+        var ctxPieAlphaList = document.getElementById("canvasPieAlphaList").getContext("2d");
+        window.myPieAlphaList = new Chart(ctxPieAlphaList).Pie(pieAlphaListData, {
+            responsive: true
+        });
 
-	    var ctxPie = document.getElementById("canvasPie").getContext("2d");
-	    window.myPie = new Chart(ctxPie).Pie(pieData, {
-	        responsive: true
-	    });
+        document.getElementById("legendDivBar").innerHTML = window.myBar.generateLegend();
+        document.getElementById("legendDivLine").innerHTML = window.myLine.generateLegend();
+        document.getElementById("legendDivRunRate").innerHTML = window.myLineRunRate.generateLegend();
+        document.getElementById("legendDivRadar").innerHTML = window.myRadar.generateLegend();
+        document.getElementById("legendDivPie").innerHTML = window.myPie.generateLegend();
+        document.getElementById("legendDivPieAlphaList").innerHTML = window.myPieAlphaList.generateLegend();
+    }
 
-	    var ctxPieAlphaList = document.getElementById("canvasPieAlphaList").getContext("2d");
-	    window.myPieAlphaList = new Chart(ctxPieAlphaList).Pie(pieAlphaListData, {
-	        responsive: true
-	    });
-
-	    document.getElementById("legendDivBar").innerHTML = window.myBar.generateLegend();
-	    document.getElementById("legendDivLine").innerHTML = window.myLine.generateLegend();
-	    document.getElementById("legendDivRunRate").innerHTML = window.myLineRunRate.generateLegend();
-	    document.getElementById("legendDivRadar").innerHTML = window.myRadar.generateLegend();
-	    document.getElementById("legendDivPie").innerHTML = window.myPie.generateLegend();
-	    document.getElementById("legendDivPieAlphaList").innerHTML = window.myPieAlphaList.generateLegend();
-	}
-
-	</script>
-	</body>
+</script>
+</body>
 </html>
